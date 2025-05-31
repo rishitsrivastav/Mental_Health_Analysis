@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 from flask_cors import CORS
 import json
 from datetime import datetime
@@ -45,5 +46,6 @@ def save_response():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(port=5000)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

@@ -57,19 +57,19 @@ function ChatInterface({ userType }: ChatInterfaceProps) {
   const [showProfile, setShowProfile] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/questions`)
-    fetch(`${import.meta.env.VITE_API_URL}/api/save-response`)
-      .then(response => response.json())
-      .then(data => {
-        setQuestions(data);
-        setMessages([
-          { text: `Welcome ${userType}! I'll be asking you a series of questions. Please answer honestly, and take your time. Let's begin with the first question:`, isBot: true },
-          { text: data[0], isBot: true }
-        ]);
-      })
-      .catch(error => console.error('Error fetching questions:', error));
-  }, [userType]);
+  // Add this inside your ChatInterface component, at the top or inside useEffect
+useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/api/questions`)
+    .then(response => response.json())
+    .then(data => {
+      setQuestions(data);
+      setMessages([
+        { text: `Welcome ${userType}! I'll be asking you a series of questions. Please answer honestly, and take your time. Let's begin with the first question:`, isBot: true },
+        { text: data[0], isBot: true }
+      ]);
+    })
+    .catch(error => console.error('Error fetching questions:', error));
+}, [userType]);
 
   useEffect(() => {
     if (analysis && !showChat && !promptDismissed) {

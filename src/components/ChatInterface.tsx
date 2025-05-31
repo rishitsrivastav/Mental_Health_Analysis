@@ -59,6 +59,7 @@ function ChatInterface({ userType }: ChatInterfaceProps) {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/questions`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/save-response`)
       .then(response => response.json())
       .then(data => {
         setQuestions(data);
